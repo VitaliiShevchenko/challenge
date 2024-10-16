@@ -13,20 +13,24 @@ class CompanyReport
   end
 
   def special_format
-    res = "\tCompany Id: #{@company_id}\n" +
-          "\tCompany Name: #{@company_name}\n" +
+    res = "\tCompany Id: #{@company_id}\n" \
+          "\tCompany Name: #{@company_name}\n" \
           "\tUsers Emailed:\n"
-    @users_emailed.each do |user|
-      res += "\t\t#{user.to_s}" +
-             "\t\t  Previous Token Balance, #{user.previous_token}" +
-             "\t\t  New Token Balance #{user.new_token}"
-    end
+    res += users_list(@users_emailed)
     res += "\tUsers Not Emailed:\n"
-    @users_not_emailed.each do |user|
-      res += "\t\t#{user.to_s}" +
-             "\t\t  Previous Token Balance, #{user.previous_token}" +
+    res += users_list(@users_not_emailed)
+    res + "\t\tTotal amount of top ups for #{@company_name}: #{@total_amount}"
+  end
+
+  # Create special output format for users
+  def users_list(users)
+    res = ''
+    users.each do |user|
+      res += "\t\t#{user}"\
+             "\t\t  Previous Token Balance, #{user.previous_token}"\
              "\t\t  New Token Balance #{user.new_token}"
     end
-    res += "\t\tTotal amount of top ups for #{@company_name}: #{@total_amount}"
+
+    res
   end
 end
