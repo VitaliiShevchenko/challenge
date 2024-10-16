@@ -14,7 +14,8 @@ class Company
 
   class << self
     def loader(file_path)
-      load_json(file_path)
+      data = load_json(file_path)
+      data.map { |company_data| new(company_data) } # Create instances for each company
     end
 
     private
@@ -25,19 +26,21 @@ class Company
       validate_data(data)
     rescue JSON::ParserError => e
       puts "Error parsing JSON from #{file_path}: #{e.message}"
-      {}
+      []
     rescue StandardError => e
       puts "Error loading data from #{file_path}: #{e.message}"
-      {}
+      []
 
     end
 
     def validate_data(data)
       # Specific validation logic for Company
-      raise "Expected a Hash but got #{data.class}" unless data.is_a?(Hash)
+      raise "Expected an Array but got #{data.class}" unless data.is_a?(Array)
 
-      @missing_keys = ATTRIBUTES.reject { |key| data.key?(key) }
-      raise "Missing required keys: #{@missing_keys.join(', ')}" unless @missing_keys.empty?
+      missing_keys = data.flat_map do |company|
+        ATTRIBUTES.reject { |key| company.key?(key) }
+      end.uniq
+      raise "Missing required keys: #{missing_keys.join(', ')}" unless missing_keys.empty?
 
       data
     end

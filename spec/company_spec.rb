@@ -6,7 +6,8 @@ require 'json'
 
 RSpec.describe 'Company' do
   let(:valid_data) { { 'id' => 1, 'name' => 'Blue Cat Inc.', 'top_up' => 71, 'email_status' => 'false' } }
-  let(:invalid_data) { { 'id' => 1, 'name' => 'Blue Cat Inc.' } } # Missing required keys
+  let(:valid_data_array) { [valid_data] }
+  let(:invalid_data) { [ { 'id' => 1, 'name' => 'Blue Cat Inc.' } ] } # Missing required keys
   describe '.initialize' do
     it 'correctly initializes attributes' do
       company = Company.new(valid_data)
@@ -21,13 +22,15 @@ RSpec.describe 'Company' do
     let(:file_path) { '../data/input/companies.json' }
 
     before do
-      allow(File).to receive(:read).with(file_path).and_return(valid_data.to_json)
+      allow(File).to receive(:read).with(file_path).and_return(valid_data_array.to_json)
     end
 
-    it 'loads valid JSON data' do
-      company_data = Company.loader(file_path)
-      expect(company_data['id']).to eq(1)
-      expect(company_data['name']).to eq('Blue Cat Inc.')
+    it 'loads valid JSON data and returns an array of Company instances' do
+      companies = Company.loader(file_path)
+      expect(companies.size).to eq(1)
+
+      expect(companies[0].id).to eq(1)
+      expect(companies[0].name).to eq('Blue Cat Inc.')
     end
 
     it 'handles JSON parsing errors' do
