@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 # Class which create special data format according the requirement
 class CompanyReport
@@ -11,27 +11,22 @@ class CompanyReport
     @users_not_emailed = users_not_emailed
     @total_amount = total_amount
   end
-  
+
   def special_format
-    "	Company Id: 2
-	Company Name: Yellow Mouse Inc.
-	Users Emailed:
-		Boberson, Bob, bob.boberson@test.com
-		  Previous Token Balance, 23
-		  New Token Balance 60
-		Boberson, John, john.boberson@test.com
-		  Previous Token Balance, 15
-		  New Token Balance 52
-		Simpson, Edgar, edgar.simpson@notreal.com
-		  Previous Token Balance, 67
-		  New Token Balance 104
-	Users Not Emailed:
-		Gordon, Sara, sara.gordon@test.com
-		  Previous Token Balance, 22
-		  New Token Balance 59
-		Weaver, Sebastian, sebastian.weaver@fake.com
-		  Previous Token Balance, 66
-		  New Token Balance 103
-		Total amount of top ups for Yellow Mouse Inc.: 185"
+    res = "\tCompany Id: #{@company_id}\n" +
+          "\tCompany Name: #{@company_name}\n" +
+          "\tUsers Emailed:\n"
+    @users_emailed.each do |user|
+      res += "\t\t#{user.to_s}" +
+             "\t\t  Previous Token Balance, #{user.previous_token}" +
+             "\t\t  New Token Balance #{user.new_token}"
+    end
+    res += "\tUsers Not Emailed:\n"
+    @users_not_emailed.each do |user|
+      res += "\t\t#{user.to_s}" +
+             "\t\t  Previous Token Balance, #{user.previous_token}" +
+             "\t\t  New Token Balance #{user.new_token}"
+    end
+    res += "\t\tTotal amount of top ups for #{@company_name}: #{@total_amount}"
   end
 end
