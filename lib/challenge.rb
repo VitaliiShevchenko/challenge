@@ -2,23 +2,27 @@
 
 require_relative '../lib/company'
 require_relative '../lib/user'
+require_relative '../lib/localout'
 require 'json'
 
 # The main Class which performs all processes of the task according to certain algorithm
 class Challenge
+  COMPANIES_PATH = 'data/input/companies.json'
+  USERS_PATH = 'data/input/users.json'
+  OUTPUT_PATH = 'data/output/'
+  NAME_OUTPUT_FILE = 'output.txt'
   attr_reader :companies, :users
 
   # load data from needy files
   def initialize
-    company_path = 'data/input/companies.json'
-    user_path = 'data/input/users.json'
-
-    @companies = Company.loader(company_path)
-    @users = User.loader(user_path)
+    @companies = Company.loader(COMPANIES_PATH)
+    @users = User.loader(USERS_PATH)
   end
 
   def run
-    puts 'Welcome to Challenge Game'
+    builder = Localout.new(@companies, @users)
+    output_data = builder.process
+    builder.write_data(output_data, "#{OUTPUT_PATH}#{NAME_OUTPUT_FILE}")
   end
 
 end

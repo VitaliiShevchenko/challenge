@@ -26,7 +26,7 @@ RSpec.describe 'Localout' do
   describe '#process' do
     it 'processes users and generates company reports' do
       reports = localout.process
-      reports2 =  localout1.process
+      reports2 = localout1.process
 
       expect(reports.size).to eq(2)
       company_report1 = reports.find { |report| report.company.id == company1.id }
@@ -57,6 +57,13 @@ RSpec.describe 'Localout' do
       expect(company_report3.users_emailed.size).to eq(0)
       expect(company_report3.users_not_emailed.size).to eq(0)
       expect(company_report3.total_amount).to eq(company3.top_up.to_i * 0)
+    end
+  end
+
+  describe '#write_data' do
+    it 'writes data to the output file' do
+      outputs = localout.process
+      expect { localout.write_data(outputs) }.not_to raise_error
     end
   end
 end

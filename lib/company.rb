@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Class for acquisition data about Company and prevent errors by loading from the files
+# Class for acquisition data about Company
 class Company
   ATTRIBUTES = %w[id name top_up email_status].freeze
   attr_accessor :id, :name, :top_up, :email_status
@@ -13,6 +13,7 @@ class Company
   end
 
   class << self
+    # Handler for safe loading data from the files
     def loader(file_path)
       data = load_json(file_path)
       data.map { |company_data| new(company_data) } # Create instances for each company
@@ -20,6 +21,7 @@ class Company
 
     private
 
+    # prevent errors by loading data  from the files that assignment for Company
     def load_json(file_path)
 
       data = JSON.parse(File.read(file_path))
@@ -33,8 +35,8 @@ class Company
 
     end
 
+    # Specific validation logic for Company
     def validate_data(data)
-      # Specific validation logic for Company
       raise "Expected an Array but got #{data.class}" unless data.is_a?(Array)
 
       missing_keys = data.flat_map do |company|

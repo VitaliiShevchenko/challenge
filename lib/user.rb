@@ -21,6 +21,7 @@ class User
   end
 
   class << self
+    # prevent errors by loading data  from the files that assignment for User
     def loader(file_path)
       data = load_json(file_path)
       data.map { |user_data| new(user_data) } # Create instances for each user
@@ -28,6 +29,7 @@ class User
 
     private
 
+    # prevent errors by loading from the files
     def load_json(file_path)
 
       data = JSON.parse(File.read(file_path))
@@ -41,8 +43,8 @@ class User
 
     end
 
+    # Specific validation logic for User
     def validate_data(data)
-      # Specific validation logic for User
       raise "Expected an Array but got #{data.class}" unless data.is_a?(Array)
 
       missing_keys = data.flat_map do |user|
