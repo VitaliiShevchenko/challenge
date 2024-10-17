@@ -1,6 +1,6 @@
 # ## Welcome to the Challenge-Project
 
-This project created as one of testing ways of sending emails to the active Users in the relative Companies.
+This project created for the building Report where have relationship between Users and Companies.
 
 ### Introduction
 
