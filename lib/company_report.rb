@@ -3,15 +3,15 @@
 require_relative '../lib/user'
 
 # Class which create special data format according the requirement
+# @param :company_id, :company_name, :users_emailed, :users_not_emailed, :total_amount
 class CompanyReport
-  attr_accessor :company_id, :company_name, :users_emailed, :users_not_emailed, :total_amount
+  attr_accessor :company
 
-  def initialize(company_id, company_name, users_emailed, users_not_emailed, total_amount)
-    @company_id = company_id
-    @company_name = company_name
-    @users_emailed = users_emailed
-    @users_not_emailed = users_not_emailed
-    @total_amount = total_amount
+  def initialize(company)
+    @company = company
+    @users_emailed = []
+    @users_not_emailed = []
+    @total_amount = 0
   end
 
   def special_format
@@ -34,5 +34,19 @@ class CompanyReport
     end
 
     res
+  end
+
+  # Create list of users which will be send email
+  def add_user_emailed(user, prev_token_balance, new_token_balance)
+    @users_emailed.push({ user: user, prev_token_balance: prev_token_balance, new_token_balance: new_token_balance })
+    @total_amount += @company.top_up
+
+    # TODO: create send e-mail
+  end
+
+  # Create list of users which will not be send email
+  def add_user_not_emailed(user, prev_token_balance, new_token_balance)
+    @users_not_emailed.push({ user: user, prev_token_balance: prev_token_balance, new_token_balance: new_token_balance })
+    @total_amount += @company.top_up
   end
 end

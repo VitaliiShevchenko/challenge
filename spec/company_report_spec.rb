@@ -30,8 +30,8 @@ RSpec.describe 'CompanyReport' do
     )
   end
   let(:users_emailed) do
-    [{ user: user1, previous_token: 23, new_token: 123 },
-     { user: user2, previous_token: 70, new_token: 170 }]
+    [{ user: user1, prev_token_balance: 23, new_token_balance: 123 },
+     { user: user2, prev_token_balance: 70, new_token_balance: 170 }]
   end
   let(:users_not_emailed) { [] }
   let(:total_amount) { 200 }
