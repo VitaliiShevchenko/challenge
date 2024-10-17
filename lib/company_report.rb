@@ -5,7 +5,7 @@ require_relative '../lib/user'
 # Class which create special data format according the requirement
 # @param :company_id, :company_name, :users_emailed, :users_not_emailed, :total_amount
 class CompanyReport
-  attr_accessor :company
+  attr_accessor :company, :users_emailed, :users_not_emailed, :total_amount
 
   def initialize(company)
     @company = company
