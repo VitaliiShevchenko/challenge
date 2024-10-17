@@ -14,9 +14,9 @@ The Challenge-Project is built on:
 2. Generate and add SSH keys your Github account by following the instructions.
 at https://help.github.com/articles/generating-ssh-keys/.
 3. Launch three commands: `eval "$(ssh-agent -s)"`, `ssh-add ~/.ssh/name_your_file_with_key` , `ssh -T git@github.com`.
-4. launch command: `git clone git@github.com:VitaliiShevchenko/challenge.
-5. $ mkdir Ruby_projects
-6. $ cd Ruby_projects
+4. $ mkdir Ruby_projects or any other name of the folder
+5. $ cd Ruby_projects
+6. Launch command: `git clone git@github.com:VitaliiShevchenko/challenge.
 7. Install the latest version of RVM: https://rvm.io.
 8. Install Ruby from terminal using RVM: `$ rvm install 3.2.2`.
 9. Made `rvm use 3.2.2 --default`.
