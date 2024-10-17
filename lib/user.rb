@@ -12,7 +12,7 @@ class User
     @email = attributes['email']
     @company_id = attributes['company_id']
     @email_status = attributes['email_status']
-    @is_active = attributes['active_status']
+    @active_status = attributes['active_status']
     @tokens = attributes['tokens']
   end
 
