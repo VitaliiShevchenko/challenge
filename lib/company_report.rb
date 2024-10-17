@@ -21,16 +21,16 @@ class CompanyReport
     res += users_list(@users_emailed)
     res += "\tUsers Not Emailed:\n"
     res += users_list(@users_not_emailed)
-    res + "\t\tTotal amount of top ups for #{@company_name}: #{@total_amount}"
+    res + "\t\tTotal amount of top ups for #{@company_name}: #{@total_amount}\n\n"
   end
 
   # Create special output format for users
   def users_list(obj)
     res = ''
     obj.each do |o|
-      res += "\t\t#{o[:user].to_s}"\
-             "\t\t  Previous Token Balance, #{o[:previous_token]}"\
-             "\t\t  New Token Balance #{o[:new_token]}"
+      res += "\t\t#{o[:user].to_s}\n"\
+             "\t\t  Previous Token Balance, #{o[:previous_token]}\n"\
+             "\t\t  New Token Balance #{o[:new_token]}\n"
     end
 
     res
