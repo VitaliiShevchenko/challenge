@@ -6,7 +6,7 @@ This project created as one of testing ways of sending emails to the active User
 
 The Challenge-Project is built on:
 * Ruby 3.2.2
-* other unnecessary gems (see Gemfile)
+* other necessary gems (see Gemfile)
 
 ## New Development Machine Install (Linux, Mac)
 
