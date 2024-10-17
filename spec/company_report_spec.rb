@@ -6,24 +6,28 @@ require_relative '../lib/user'
 
 RSpec.describe 'CompanyReport' do
   let(:user1) do
-    {		'id' => 1,
-       'first_name' => 'Tanya',
-       'last_name' => 'Nichols',
-       'email' => 'tanya.nichols@test.com',
-       'company_id' => 2,
-       'email_status' => true,
-       'active_status' => false,
-       'tokens' => 23 }
+    User.new(
+      {		'id' => 1,
+         'first_name' => 'Tanya',
+         'last_name' => 'Nichols',
+         'email' => 'tanya.nichols@test.com',
+         'company_id' => 2,
+         'email_status' => true,
+         'active_status' => false,
+         'tokens' => 23 }
+    )
   end
   let(:user2) do
-    {		'id' => 2,
-       'first_name' => 'John',
-       'last_name' => 'Conor',
-       'email' => 'john.conor@test.com',
-       'company_id' => 2,
-       'email_status' => true,
-       'active_status' => false,
-       'tokens' => 70 }
+    User.new(
+      {		'id' => 2,
+         'first_name' => 'John',
+         'last_name' => 'Conor',
+         'email' => 'john.conor@test.com',
+         'company_id' => 2,
+         'email_status' => true,
+         'active_status' => false,
+         'tokens' => 70 }
+    )
   end
   let(:users_emailed) do
     [{ user: user1, previous_token: 23, new_token: 123 },
@@ -45,11 +49,12 @@ RSpec.describe 'CompanyReport' do
 
   describe '#special_format' do
     it 'returns a correctly formatted report' do
+      expect(company_report.special_format).to include('Nichols, Tanya, tanya.nichols@test.com')
       expect(company_report.special_format).to include('Previous Token Balance, 23')
       expect(company_report.special_format).to include('New Token Balance 123')
       expect(company_report.special_format).to include('Previous Token Balance, 70')
       expect(company_report.special_format).to include('New Token Balance 170')
-      expect(company_report.special_format).to include('Total amount of top ups for Test Company: 200')
+      expect(company_report.special_format).to include('Total amount of top ups for No matter Company: 200')
     end
   end
 end

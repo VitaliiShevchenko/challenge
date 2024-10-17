@@ -1,5 +1,7 @@
 # frozen_string_literal: false
 
+require_relative '../lib/user'
+
 # Class which create special data format according the requirement
 class CompanyReport
   attr_accessor :company_id, :company_name, :users_emailed, :users_not_emailed, :total_amount
@@ -23,12 +25,12 @@ class CompanyReport
   end
 
   # Create special output format for users
-  def users_list(users)
+  def users_list(obj)
     res = ''
-    users.each do |user|
-      res += "\t\t#{user}"\
-             "\t\t  Previous Token Balance, #{user.previous_token}"\
-             "\t\t  New Token Balance #{user.new_token}"
+    obj.each do |o|
+      res += "\t\t#{o[:user].to_s}"\
+             "\t\t  Previous Token Balance, #{o[:previous_token]}"\
+             "\t\t  New Token Balance #{o[:new_token]}"
     end
 
     res
