@@ -6,17 +6,16 @@ class Company
   attr_accessor :id, :name, :top_up, :email_status
 
   def initialize(attributes)
-    @id = attributes['id']
-    @name = attributes['name']
-    @top_up = attributes['top_up']
+    @id           = attributes['id']
+    @name         = attributes['name']
+    @top_up       = attributes['top_up']
     @email_status = attributes['email_status']
   end
 
   class << self
     # Handler for safe loading data from the files
     def loader(file_path)
-      data = load_json(file_path)
-      data.map { |company_data| new(company_data) } # Create instances for each company
+      load_json(file_path).map { |company_data| new(company_data) } # Create instances for each company
     end
 
     private
