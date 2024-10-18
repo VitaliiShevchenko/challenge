@@ -21,10 +21,10 @@ class Localout
     outputs = []
     @companies.sort_by(&:id).each do |company|
       company_report = CompanyReport.new(company)
-      company_users = @users.sort_by(&:last_name).select { |user| user.company_id == company.id && user.active_status }
+      company_users  = @users.sort_by(&:last_name).select { |user| user.company_id == company.id && user.active_status }
       company_users.each do |user|
         previous_balance = user.tokens
-        new_balance = previous_balance + company.top_up
+        new_balance      = previous_balance + company.top_up
         if user.email_status && company.email_status
           company_report.add_user_emailed(user, previous_balance, new_balance)
         else
