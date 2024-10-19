@@ -7,22 +7,23 @@ require 'json'
 
 # The main Class which performs all processes of the task according to certain algorithm
 class Challenge
-  COMPANIES_PATH = 'data/input/companies.json'
-  USERS_PATH = 'data/input/users.json'
-  OUTPUT_PATH = 'data/output/'
+  COMPANIES_PATH   = 'data/input/companies.json'
+  USERS_PATH       = 'data/input/users.json'
+  OUTPUT_PATH      = 'data/output/'
   NAME_OUTPUT_FILE = 'output.txt'
   attr_reader :companies, :users
 
   # load data from needy files
   def initialize
     @companies = Company.loader(COMPANIES_PATH)
-    @users = User.loader(USERS_PATH)
+    @users     = User.loader(USERS_PATH)
   end
 
   def run
-    builder = Localout.new(@companies, @users)
+    builder     = Localout.new(@companies, @users)
     output_data = builder.process
-    builder.write_data(output_data, "#{OUTPUT_PATH}#{NAME_OUTPUT_FILE}")
+    output_text = builder.convert_to_txt output_data
+    builder.write_data(output_text, "#{OUTPUT_PATH}#{NAME_OUTPUT_FILE}")
   end
 
 end
