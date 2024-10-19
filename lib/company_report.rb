@@ -16,13 +16,13 @@ class CompanyReport
 
   # Convert `instance` of the CompanyReport class to the `text block` in the defined style
   def special_text_style
-    "\tCompany Id: #{ @company.id }\n"           \
-    "\tCompany Name: #{ @company.name }\n"       \
+    "\tCompany Id: #{@company.id}\n"           \
+    "\tCompany Name: #{@company.name}\n"       \
     "\tUsers Emailed:\n"                         \
-    "#{text_users_list( @users_emailed )}"       \
+    "#{text_users_list(@users_emailed)}"       \
     "\tUsers Not Emailed:\n"                     \
-    "#{text_users_list( @users_not_emailed )}"   \
-    "\t\tTotal amount of top ups for #{ @company.name }: #{ @total_amount }\n\n"
+    "#{text_users_list(@users_not_emailed)}"   \
+    "\t\tTotal amount of top ups for #{@company.name}: #{@total_amount}\n\n"
   end
 
   # Create users list from the array of [Hash] with the key [{:user, :prev_token_balance, :new_token_balance}] in the text format
@@ -51,5 +51,24 @@ class CompanyReport
                               prev_token_balance: prev_token_balance,
                               new_token_balance: new_token_balance })
     @total_amount += @company.top_up.to_i
+  end
+
+  # Create function fo added financial information to the CompanyReport by quarter
+  def add_financial_quarter(financial)
+    @financial_quarter = financial
+  end
+
+  # create financial report for year
+  def financial_report
+    profit_quarter = @financial_quarter[:revenue].each { |k| @financial_quarter[:revenue][x].to_i - @financial_quarter[:expenses][k].to_i }.sum
+    revenue  = @financial_quarter[:revenue].sum
+    expenses = @financial_quarter[:expenses].sum
+    profit   = revenue - expenses
+    "Financial Report for #{@company[:name]}\n"            \
+    "_____________________#{'_' * @company[:name].size}\n" \
+    "Total Revenue: #{revenue}\n"                          \
+    "Total Expenses: #{expenses}\n"                        \
+    "Total Profit: #{profit}\n"                            \
+    "Highest Profit Quarter: #{profit_quarter.max}\n"
   end
 end
