@@ -55,7 +55,7 @@ RSpec.describe 'CompanyReport' do
     end
   end
 
-  describe '#special_format' do
+  describe '#special_text_style' do
     it 'returns a correctly formatted report' do
       users_emailed.map do |item|
         company_report.add_user_emailed(item[:user], item[:prev_token_balance], item[:new_token_balance])
@@ -63,12 +63,12 @@ RSpec.describe 'CompanyReport' do
       users_not_emailed.map do |item|
         company_report.add_user_emailed(item[:user], item[:prev_token_balance], item[:new_token_balance])
       end
-      expect(company_report.special_format).to include('Nichols, Tanya, tanya.nichols@test.com')
-      expect(company_report.special_format).to include('Previous Token Balance, 23')
-      expect(company_report.special_format).to include('New Token Balance 123')
-      expect(company_report.special_format).to include('Previous Token Balance, 70')
-      expect(company_report.special_format).to include('New Token Balance 170')
-      expect(company_report.special_format).to include('Total amount of top ups for No matter Company: 200')
+      expect(company_report.special_text_style).to include('Nichols, Tanya, tanya.nichols@test.com')
+      expect(company_report.special_text_style).to include('Previous Token Balance, 23')
+      expect(company_report.special_text_style).to include('New Token Balance 123')
+      expect(company_report.special_text_style).to include('Previous Token Balance, 70')
+      expect(company_report.special_text_style).to include('New Token Balance 170')
+      expect(company_report.special_text_style).to include('Total amount of top ups for No matter Company: 200')
     end
   end
 end

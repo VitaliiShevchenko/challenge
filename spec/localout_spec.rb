@@ -62,8 +62,9 @@ RSpec.describe 'Localout' do
 
   describe '#write_data' do
     it 'writes data to the output file' do
-      outputs = localout.process
-      expect { localout.write_data(outputs) }.not_to raise_error
+      output_in_arr  = localout.process
+      outputs_in_txt = localout.convert_to_txt(output_in_arr)
+      expect { localout.write_data(outputs_in_txt, "data/output/output.txt") }.not_to raise_error
     end
   end
 end

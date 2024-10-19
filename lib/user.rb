@@ -6,14 +6,14 @@ class User
   attr_accessor :id, :first_name, :last_name, :email, :company_id, :email_status, :active_status, :tokens
 
   def initialize(attributes)
-    @id = attributes['id']
-    @first_name = attributes['first_name']
-    @last_name = attributes['last_name']
-    @email = attributes['email']
-    @company_id = attributes['company_id']
-    @email_status = attributes['email_status']
+    @id            = attributes['id']
+    @first_name    = attributes['first_name']
+    @last_name     = attributes['last_name']
+    @email         = attributes['email']
+    @company_id    = attributes['company_id']
+    @email_status  = attributes['email_status']
     @active_status = attributes['active_status']
-    @tokens = attributes['tokens']
+    @tokens        = attributes['tokens']
   end
 
   def to_s
