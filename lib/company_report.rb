@@ -64,11 +64,16 @@ class CompanyReport
     revenue  = @financial_quarter[:revenue].sum
     expenses = @financial_quarter[:expenses].sum
     profit   = revenue - expenses
-    "Financial Report for #{@company[:name]}\n"            \
-    "_____________________#{'_' * @company[:name].size}\n" \
-    "Total Revenue: #{revenue}\n"                          \
-    "Total Expenses: #{expenses}\n"                        \
-    "Total Profit: #{profit}\n"                            \
-    "Highest Profit Quarter: #{profit_quarter.max}\n"
+    [profit_quarter, revenue, expenses, profit]
+  end
+
+  def print_financial_report
+    profit_quarter, revenue, expenses, profit = financial_report
+      "Financial Report for #{@company[:name]}\n"            \
+      "_____________________#{'_' * @company[:name].size}\n" \
+      "Total Revenue: #{revenue}\n"                          \
+      "Total Expenses: #{expenses}\n"                        \
+      "Total Profit: #{profit}\n"                            \
+      "Highest Profit Quarter: #{profit_quarter.max}\n"
   end
 end
