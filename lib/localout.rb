@@ -44,6 +44,12 @@ class Localout
   # [] :path_file - includes path and name of the file. @example : "path/to/file/output.txt"
   def write_data(outputs, path_file)
     puts outputs
+    # Get the directory from the file path
+    directory = File.dirname(path_file)
+
+    # Check if the directory exists, and create it if it doesn't
+    Dir.mkdir(directory) unless Dir.exist?(directory)
+
     File.write(path_file, outputs)
     puts "This report saved to the #{path_file}"
   end
